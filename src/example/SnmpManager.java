@@ -14,6 +14,8 @@ import org.snmp4j.util.MultiThreadedMessageDispatcher;
 import org.snmp4j.util.ThreadPool;
 
 import java.io.IOException;
+import java.util.Set;
+import java.util.Vector;
 
 
 public class SnmpManager implements CommandResponder {
@@ -115,17 +117,30 @@ public class SnmpManager implements CommandResponder {
     }
 
 
+    // PDU has getVariableBindings method Vector<? extends VariableBinding>
+    // VariableBinding has getOid getVariable methods.. OID || Variable
     public void processPdu(CommandResponderEvent cmdRespEvent) {
         // TODO Auto-generated method stub
-        System.out.println("Received PDU...");
+//        System.out.println("Received PDU...");
         PDU pdu = cmdRespEvent.getPDU();
         if (pdu != null) {
 
-//            System.out.println("Trap Type = " + pdu.getType());
-//            System.out.println("Variable Bindings = "
-//                    + pdu.getVariableBindings());
-//            System.out.println((pdu.getVariableBindings()));
-            SnmpValueFetcher.getOidAndStatus(pdu.getVariableBindings());
+            System.out.println("Trap Type = " + pdu.getType());
+            System.out.println("Variable Bindings = "
+                    + pdu.getVariableBindings()
+                    + pdu.getVariableBindings()
+            );
+
+            Vector<? extends VariableBinding> variables = pdu.getVariableBindings();
+            String value = "";
+            for (VariableBinding variable : variables) {
+                value = SnmpValueFetcher.loopChecker(variable);
+                if (!value.isEmpty()) {
+                    System.out.println(value);
+                }
+            }
+
+
         }
 
     }
