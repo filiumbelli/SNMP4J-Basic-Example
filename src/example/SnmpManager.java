@@ -4,7 +4,6 @@ import org.snmp4j.*;
 import org.snmp4j.event.ResponseEvent;
 import org.snmp4j.mp.MPv1;
 import org.snmp4j.mp.MPv2c;
-import org.snmp4j.mp.SnmpConstants;
 import org.snmp4j.security.Priv3DES;
 import org.snmp4j.security.SecurityProtocols;
 import org.snmp4j.smi.*;
@@ -17,7 +16,7 @@ import org.snmp4j.util.ThreadPool;
 import java.io.IOException;
 
 
-public class SnmpExample implements CommandResponder {
+public class SnmpManager implements CommandResponder {
 
 
     // Config params
@@ -122,10 +121,11 @@ public class SnmpExample implements CommandResponder {
         PDU pdu = cmdRespEvent.getPDU();
         if (pdu != null) {
 
-            System.out.println("Trap Type = " + pdu.getType());
-            System.out.println("Variable Bindings = "
-                    + pdu.getVariableBindings());
-
+//            System.out.println("Trap Type = " + pdu.getType());
+//            System.out.println("Variable Bindings = "
+//                    + pdu.getVariableBindings());
+//            System.out.println((pdu.getVariableBindings()));
+            SnmpValueFetcher.getOidAndStatus(pdu.getVariableBindings());
         }
 
     }
