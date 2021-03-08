@@ -20,13 +20,20 @@ import java.util.Vector;
 
 public class SnmpManager implements CommandResponder {
 
+//    private static final SnmpManager snmpManager = new SnmpManager();
+//
+//    private SnmpManager() {
+//    }
+//
+//    public static SnmpManager getInstance() {
+//        return snmpManager;
+//    }
 
     // Config params
     private static final String CONFIG_IP = "message.operator.params.snmp.ip";
     private static final String CONFIG_PORT = "message.operator.params.snmp.port";
     private final String[] configParamKeys = {
             CONFIG_IP, CONFIG_PORT};
-
 
     private static Integer status = 0;
     // TODO change method
