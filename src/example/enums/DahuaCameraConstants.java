@@ -1,4 +1,4 @@
-package example;
+package example.enums;
 
 public enum DahuaCameraConstants {
     //DAHUA-SNMP-MIB

@@ -1,8 +1,8 @@
-package example;
+package example.enums;
 
 public enum MoxaEDSConstants {
     // MOXA EDS-G512E-T
-//    PORT_1(".1.3.6.1.4.1.8691.7.70.1.9.1.1.3.1"),
+    PORT_1(".1.3.6.1.4.1.8691.7.70.1.9.1.1.3.1"),
     PORT_2(".1.3.6.1.4.1.8691.7.70.1.9.1.1.3.2"),
     PORT_3(".1.3.6.1.4.1.8691.7.70.1.9.1.1.3.3"),
     PORT_4(".1.3.6.1.4.1.8691.7.70.1.9.1.1.3.4"),
@@ -17,12 +17,14 @@ public enum MoxaEDSConstants {
     // Set port 161
     // Trap port 162
     COMMUNITY("public");
-    final String variable;
 
-    MoxaEDSConstants(String variable)   {
+    public final String variable;
+
+    MoxaEDSConstants(String variable) {
         this.variable = variable;
     }
-//    PORT_1.variable,
-    final static String[] PORTS = { PORT_2.variable, PORT_3.variable, PORT_4.variable, PORT_5.variable, PORT_6.variable, PORT_7.variable, PORT_8.variable};
+
+    //    PORT_1.variable,
+    public final static String[] PORTS = {PORT_2.variable, PORT_3.variable, PORT_4.variable, PORT_5.variable, PORT_6.variable, PORT_7.variable, PORT_8.variable};
 
 }

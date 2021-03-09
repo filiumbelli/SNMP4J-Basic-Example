@@ -1,6 +1,6 @@
 package example;
 
-import org.ietf.jgss.Oid;
+import example.enums.DahuaCameraConstants;
 import org.snmp4j.PDU;
 import org.snmp4j.smi.OID;
 import org.snmp4j.smi.Variable;
@@ -9,7 +9,7 @@ import org.snmp4j.smi.VariableBinding;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class SnmpValueFetcher {
+public class DahuaCameraValueFetcher {
     static String checkStatus = "";
     static String checkTime = "";
 
@@ -36,24 +36,16 @@ public class SnmpValueFetcher {
     }
 
 
-    public static String loopChecker(VariableBinding variable) {
+    public static String checkDetection(VariableBinding variable) {
         OID oid = variable.getOid();
         Variable status = variable.getVariable();
         if (checkDetectionOid(oid) && !checkStatus.equals(status.toString())) {
-            checkStatus = status.toString();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            synchronized (status) {
+                checkStatus = status.toString();
+                return checkStatus;
             }
-            return checkStatus;
         } else if (checkDetectionTime(oid) && !checkTime.equals(status.toString())) {
             checkTime = status.toString();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             return checkTime;
         }
         return "";
